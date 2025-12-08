@@ -3,117 +3,78 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Inventario de Partes y Piezas</title>
+  <title>Inicio - Inventario de Partes y Piezas</title>
 
   <style>
     body {
       margin: 0;
-      height: 100vh;
       font-family: "Poppins", sans-serif;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      background: linear-gradient(135deg, #0a0f2c, #1b295a);
+      background: #f4f4f4;
     }
 
-    .glow {
-      position: absolute;
-      width: 350px;
-      height: 350px;
-      background: rgba(255,255,255,0.15);
-      filter: blur(120px);
-      border-radius: 50%;
+    header {
+      background: #1f2937;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      font-size: 1.5rem;
     }
-
-    .glow1 { top: 10%; left: 10%; }
-    .glow2 { bottom: 10%; right: 10%; }
 
     .container {
-      width: 90%;
-      max-width: 420px;
-      background: rgba(255,255,255,0.12);
-      padding: 45px 60px;
-      text-align: center;
-      border-radius: 22px;
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-      box-shadow: 0 8px 30px rgba(0,0,0,0.35);
-      position: relative;
-      z-index: 2;
-      color: #fff;
-      animation: fadeIn 0.9s ease;
+      max-width: 900px;
+      margin: 40px auto;
+      background: white;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
 
-    h1 {
-      font-size: 2.4em;
-      margin-bottom: 25px;
-      font-weight: 700;
+    .btns {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
     }
 
-    .btn {
+    a.button {
       display: inline-block;
-      width: 100%;
-      text-decoration: none;
-      background-color: #e63946;
-      color: #fff;
-      padding: 14px 0;
-      border-radius: 12px;
-      font-size: 1.2em;
-      font-weight: 600;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-    }
-
-    .btn:hover {
-      background-color: #f1faee;
-      color: #1d3557;
-      transform: scale(1.05);
-      box-shadow: 0 6px 18px rgba(0,0,0,0.35);
-    }
-
-    #btnCerrarSesion {
-      position: absolute;
-      top: 15px;
-      right: 15px;
-      background-color: #e63946;
+      padding: 12px 20px;
+      background: #2563eb;
       color: white;
-      padding: 8px 14px;
-      border-radius: 12px;
-      border: none;
-      cursor: pointer;
-      font-weight: bold;
+      text-decoration: none;
+      border-radius: 8px;
       transition: 0.3s;
+      text-align: center;
     }
 
-    #btnCerrarSesion:hover {
-      background-color: #f1faee;
-      color: #1d3557;
-      transform: scale(1.05);
+    a.button:hover {
+      background: #1e40af;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-20px); }
-      to { opacity: 1; transform: translateY(0); }
+    a.logout {
+      background: #dc2626;
+    }
+
+    a.logout:hover {
+      background: #991b1b;
     }
   </style>
 </head>
 
 <body>
-  <div class="glow glow1"></div>
-  <div class="glow glow2"></div>
+  <header>
+    Inventario de Partes y Piezas de una Computadora
+  </header>
 
   <div class="container">
-    <button id="btnCerrarSesion">Cerrar sesi&oacute;n</button>
-    <h1>Inventario de Partes y Piezas</h1>
-    <a href="listado.html" class="btn">Ver listado de componentes</a>
-  </div>
+    <h2>Bienvenido</h2>
+    <p>
+      Selecciona una opción para continuar navegando en el sistema.
+    </p>
 
-  <script>
-    document.getElementById("btnCerrarSesion").addEventListener("click", () => {
-      localStorage.removeItem("sesionActiva");
-      window.location.href = "index.html";
-    });
-  </script>
+    <div class="btns">
+      <a href="listado.html" class="button">Ver listado de componentes</a>
+      <a href="index.html" class="button logout">Cerrar sesión</a>
+    </div>
+  </div>
 </body>
 </html>
