@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Iniciar sesión</title>
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      font-family: "Poppins", sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: linear-gradient(135deg, #0a0f2c, #1b295a);
+    }
+
+    .glow {
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      background: rgba(255, 255, 255, 0.15);
+      filter: blur(120px);
+      border-radius: 50%;
+      opacity: 0.5;
+    }
+
+    .glow1 { top: 10%; left: 10%; }
+    .glow2 { bottom: 10%; right: 10%; }
+
+    .card {
+      width: 380px;
+      background: rgba(255, 255, 255, 0.12);
+      padding: 40px;
+      border-radius: 20px;
+      backdrop-filter: blur(20px);
+      text-align: center;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+      position: relative;
+      z-index: 10;
+      animation: fadeIn 1s ease;
+    }
+
+    h2 {
+      color: #ffffff;
+      margin-bottom: 15px;
+      font-size: 2em;
+    }
+
+    /* --- LOGO ROBOT --- */
+    .robot-logo {
+      width: 120px;
+      margin: 0 auto 20px auto;
+      display: block;
+    }
+
+    .input-box {
+      position: relative;
+      margin: 18px 0;
+      width: 100%;
+    }
+
+    .input-box input {
+      width: 100%;
+      padding: 12px 40px;
+      border-radius: 12px;
+      border: none;
+      outline: none;
+      background: rgba(255, 255, 255, 0.85);
+      color: #1d3557;
+      font-size: 1em;
+      box-sizing: border-box;
+    }
+
+    .icon {
+      width: 20px;
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      opacity: 0.8;
+    }
+
+    .btn-login {
+      width: 100%;
+      background: #e63946;
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 12px;
+      font-size: 1.1em;
+      cursor: pointer;
+      transition: 0.3s;
+      margin-top: 10px;
+    }
+
+    .btn-login:hover {
+      background: #f1faee;
+      color: #1d3557;
+      transform: scale(1.05);
+    }
+
+    .error {
+      color: #ffb3b3;
+      font-size: 0.9em;
+      margin-top: 8px;
+      display: none;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="glow glow1"></div>
+  <div class="glow glow2"></div>
+
+  <div class="card">
+
+    <!-- LOGO ROBOT MINIMALISTA -->
+    <svg class="robot-logo" viewBox="0 0 100 100" fill="none">
+        <rect x="20" y="25" width="60" height="50" rx="12" stroke="#ffffff" stroke-width="4"/>
+        <circle cx="40" cy="45" r="7" fill="#00d4ff"/>
+        <circle cx="60" cy="45" r="7" fill="#00d4ff"/>
+        <rect x="35" y="60" width="30" height="6" rx="3" fill="#ffffff"/>
+        <rect x="47" y="10" width="6" height="12" rx="3" fill="#ffffff"/>
+        <circle cx="50" cy="10" r="5" fill="#00d4ff"/>
+    </svg>
+
+    <h2>Bienvenido</h2>
+
+    <div class="input-box">
+      <svg class="icon" fill="#1d3557" viewBox="0 0 24 24">
+        <path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 
+        5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z"/>
+      </svg>
+      <input type="text" id="usuario" placeholder="Usuario" />
+    </div>
+
+    <div class="input-box">
+      <svg class="icon" fill="#1d3557" viewBox="0 0 24 24">
+        <path d="M17 9h-1V7c0-2.8-2.2-5-5-5S6 4.2 6 7v2H5c-1.1 
+        0-2 .9-2 2v11c0 1.1.9 2 2 2h12c1.1 0 2-.9 
+        2-2V11c0-1.1-.9-2-2-2zm-5 9c-1.1 
+        0-2-.9-2-2 0-.7.4-1.4 1-1.7V13c0-.6.4-1 
+        1-1s1 .4 1 1v1.3c.6.3 1 1 1 
+        1.7 0 1.1-.9 2-2 2zm3-9H9V7c0-1.7 
+        1.3-3 3-3s3 1.3 3 3v2z"/>
+      </svg>
+      <input type="password" id="clave" placeholder="Contraseña" />
+    </div>
+
+    <button class="btn-login" id="btnLogin">Iniciar sesión</button>
+
+    <p class="error" id="mensajeError">Usuario o contraseña incorrectos</p>
+  </div>
+
+  <script>
+    const userCorrecto = "admin";
+    const claveCorrecta = "1234";
+
+    const btnLogin = document.getElementById("btnLogin");
+    const usuario = document.getElementById("usuario");
+    const clave = document.getElementById("clave");
+    const mensajeError = document.getElementById("mensajeError");
+
+    btnLogin.addEventListener("click", () => {
+      if (usuario.value === userCorrecto && clave.value === claveCorrecta) {
+        localStorage.setItem("sesionActiva", "true");
+        window.location.href = "inicio.html";
+      } else {
+        mensajeError.style.display = "block";
+      }
+    });
+  </script>
+
+</body>
+</html>
