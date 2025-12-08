@@ -9,128 +9,315 @@
     body {
       margin: 0;
       font-family: "Poppins", sans-serif;
-      background: #f4f4f4;
+      background: linear-gradient(135deg, #0a0f2c, #1b295a);
+      display: flex;
+      justify-content: center;
+      padding: 40px 20px;
+      overflow-x: hidden;
     }
 
-    header {
-      background: #1f2937;
-      color: white;
-      padding: 20px;
-      text-align: center;
-      font-size: 1.5rem;
+    .glow {
+      position: absolute;
+      width: 350px;
+      height: 350px;
+      background: rgba(255,255,255,0.15);
+      filter: blur(120px);
+      border-radius: 50%;
+      z-index: 0;
     }
+
+    .glow1 { top: 10%; left: 10%; }
+    .glow2 { bottom: 10%; right: 10%; }
 
     .container {
+      width: 100%;
       max-width: 1000px;
-      margin: 40px auto;
-      background: white;
-      padding: 25px;
+      background: rgba(255,255,255,0.12);
+      padding: 35px 40px;
+      border-radius: 22px;
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.35);
+      position: relative;
+      z-index: 2;
+      color: #fff;
+      animation: fadeIn 0.9s ease;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 2.2em;
+    }
+
+    #btnCerrarSesion {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background-color: #e63946;
+      color: white;
+      padding: 8px 14px;
       border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    #btnCerrarSesion:hover {
+      background-color: #f1faee;
+      color: #1d3557;
+      transform: scale(1.05);
+    }
+
+    .formulario {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin-bottom: 15px;
+    }
+
+    input, select {
+      padding: 12px;
+      border-radius: 12px;
+      border: none;
+      outline: none;
+      font-size: 1em;
+      width: 220px;
+      box-sizing: border-box;
+    }
+
+    .btn-agregar {
+      background-color: #28a745;
+      color: white;
+      padding: 12px 18px;
+      border-radius: 12px;
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .btn-agregar:hover { background-color: #218838; }
+
+    .mensaje-error {
+      color: #ffb3b3;
+      text-align: center;
+      margin-bottom: 10px;
+      display: none;
+    }
+
+    .tabla-wrapper {
+      max-height: 400px;
+      overflow-y: auto;
+      border-radius: 12px;
+      margin-bottom: 15px;
     }
 
     table {
       width: 100%;
       border-collapse: collapse;
-      margin-top: 15px;
-    }
-
-    thead {
-      background: #2563eb;
-      color: white;
     }
 
     th, td {
       padding: 12px;
-      text-align: left;
-      border-bottom: 1px solid #ddd;
+      text-align: center;
+      font-size: 0.95em;
     }
 
-    tr {
-      transition: background 0.3s, transform 0.2s;
+    th {
+      background-color: #457b9d;
+      color: white;
+      position: sticky;
+      top: 0;
+      z-index: 5;
+    }
+
+    tr:nth-child(even) {
+      background-color: rgba(255,255,255,0.05);
     }
 
     tr:hover {
-      background: #e5e7eb;
-      transform: scale(1.01);
-    }
-
-    .btns {
-      margin-top: 25px;
-      display: flex;
-      justify-content: space-between;
-    }
-
-    a.button {
-      display: inline-block;
-      padding: 12px 20px;
-      background: #2563eb;
-      color: white;
-      text-decoration: none;
-      border-radius: 8px;
+      background-color: rgba(255,255,255,0.15);
       transition: 0.3s;
-      text-align: center;
     }
 
-    a.button:hover {
-      background: #1e40af;
+    .estado {
+      padding: 5px 12px;
+      border-radius: 12px;
+      font-weight: bold;
+      display: inline-block;
     }
 
-    a.logout {
-      background: #dc2626;
+    .Disponible { background-color: #28a745; color: white; }
+    .Agotado { background-color: #e63946; color: white; }
+    .Bajo { background-color: #ffb703; color: #1d3557; }
+
+    .btn-eliminar {
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      font-size: 1.4em;
+      color: #e63946;
+      transition: 0.3s;
     }
 
-    a.logout:hover {
-      background: #991b1b;
+    .btn-eliminar:hover { transform: scale(1.2); }
+
+    .btn-volver {
+      display: inline-block;
+      text-decoration: none;
+      color: white;
+      background-color: #1d3557;
+      padding: 12px 22px;
+      border-radius: 12px;
+      transition: all 0.3s ease;
+      font-weight: bold;
     }
+
+    .btn-volver:hover { background-color: #457b9d; }
+
+    @keyframes fadeIn {
+      from {opacity:0; transform: translateY(-20px);}
+      to {opacity:1; transform: translateY(0);}
+    }
+
+    @keyframes fadeSlide {
+      from {opacity:0; transform:translateY(-10px);}
+      to {opacity:1; transform:translateY(0);}
+    }
+
+    .fila-animada { animation: fadeSlide 0.5s ease forwards; }
   </style>
 </head>
-
 <body>
 
-  <header>
-    Listado de Componentes
-  </header>
+  <div class="glow glow1"></div>
+  <div class="glow glow2"></div>
 
   <div class="container">
-    <h2>Categoría: Componentes de Computadora</h2>
+    <button id="btnCerrarSesion">Cerrar sesión</button>
 
-    <table>
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Nombre</th>
-          <th>Categoría</th>
-          <th>Descripción</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>001</td>
-          <td>Placa Madre</td>
-          <td>Hardware</td>
-          <td>Componente principal donde se conectan todas las piezas.</td>
-        </tr>
-        <tr>
-          <td>002</td>
-          <td>Procesador</td>
-          <td>Hardware</td>
-          <td>Unidad central encargada de ejecutar instrucciones.</td>
-        </tr>
-        <tr>
-          <td>003</td>
-          <td>Memoria RAM</td>
-          <td>Hardware</td>
-          <td>Almacena datos temporales para procesos activos.</td>
-        </tr>
-      </tbody>
-    </table>
+    <h1>Listado de Componentes</h1>
 
-    <div class="btns">
-      <a href="inicio.html" class="button">Volver</a>
-      <a href="index.html" class="button logout">Cerrar sesión</a>
+    <div class="mensaje-error" id="mensajeError">
+      Por favor complete todos los campos correctamente.
+    </div>
+
+    <div class="formulario">
+      <input type="text" id="nombre" placeholder="Nombre del componente" />
+      <input type="number" id="cantidad" placeholder="Cantidad" min="0" />
+      <input type="text" id="categoria" placeholder="Categoría (RAM, CPU, etc.)" />
+
+      <select id="estado">
+        <option value="Disponible">Disponible</option>
+        <option value="Bajo">Bajo stock</option>
+        <option value="Agotado">Agotado</option>
+      </select>
+
+      <button class="btn-agregar" id="btnAgregar">Agregar</button>
+    </div>
+
+    <div class="tabla-wrapper">
+      <table id="tablaComponentes">
+        <thead>
+          <tr>
+            <th>Componente</th>
+            <th>Categoría</th>
+            <th>Cantidad</th>
+            <th>Estado</th>
+            <th>Acción</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <div style="text-align:center;">
+      <a href="inicio.html" class="btn-volver">⬅ Volver al inicio</a>
     </div>
   </div>
+
+  <script>
+    const tabla = document.querySelector("#tablaComponentes tbody");
+    const btnAgregar = document.querySelector("#btnAgregar");
+    const nombreInput = document.querySelector("#nombre");
+    const cantidadInput = document.querySelector("#cantidad");
+    const categoriaInput = document.querySelector("#categoria");
+    const estadoSelect = document.querySelector("#estado");
+    const mensajeError = document.getElementById("mensajeError");
+
+    document.getElementById("btnCerrarSesion").addEventListener("click", () => {
+      localStorage.removeItem("sesionActiva");
+      window.location.href = "index.html";
+    });
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const componentes = JSON.parse(localStorage.getItem("componentes")) || [];
+      componentes.forEach(c => agregarFila(c));
+    });
+
+    function guardarEnLocalStorage() {
+      const filas = [...tabla.querySelectorAll("tr")].map(tr => {
+        const tds = tr.querySelectorAll("td");
+        return {
+          nombre: tds[0].textContent,
+          categoria: tds[1].textContent,
+          cantidad: parseInt(tds[2].textContent),
+          estado: tds[3].innerText
+        };
+      });
+
+      localStorage.setItem("componentes", JSON.stringify(filas));
+    }
+
+    function agregarFila({ nombre, categoria, cantidad, estado }) {
+      const fila = document.createElement("tr");
+      const claseEstado = estado === "Disponible" ? "Disponible" :
+                          estado === "Agotado" ? "Agotado" : "Bajo";
+
+      fila.classList.add("fila-animada");
+
+      fila.innerHTML = `
+        <td>${nombre}</td>
+        <td>${categoria}</td>
+        <td>${cantidad}</td>
+        <td><span class="estado ${claseEstado}">${estado}</span></td>
+        <td><button class="btn-eliminar" title="Eliminar">&#128465;</button></td>
+      `;
+
+      tabla.appendChild(fila);
+    }
+
+    btnAgregar.addEventListener("click", () => {
+      const nombre = nombreInput.value.trim();
+      const cantidad = parseInt(cantidadInput.value);
+      const categoria = categoriaInput.value.trim();
+      const estado = estadoSelect.value;
+
+      if (nombre === "" || isNaN(cantidad) || categoria === "") {
+        mensajeError.style.display = "block";
+        setTimeout(() => mensajeError.style.display = "none", 3000);
+        return;
+      }
+
+      agregarFila({ nombre, categoria, cantidad, estado });
+      guardarEnLocalStorage();
+
+      nombreInput.value = "";
+      cantidadInput.value = "";
+      categoriaInput.value = "";
+      estadoSelect.value = "Disponible";
+    });
+
+    tabla.addEventListener("click", (e) => {
+      if (e.target.classList.contains("btn-eliminar")) {
+        e.target.closest("tr").remove();
+        guardarEnLocalStorage();
+      }
+    });
+  </script>
 
 </body>
 </html>
