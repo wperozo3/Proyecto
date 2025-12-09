@@ -189,6 +189,30 @@
     }
 
     .fila-animada { animation: fadeSlide 0.5s ease forwards; }
+
+    /* BOTONES EXPORTAR */
+    .export-buttons {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .export-btn {
+      background-color: #06d6a0;
+      margin: 5px;
+      padding: 12px 18px;
+      border-radius: 10px;
+      font-weight: bold;
+      cursor: pointer;
+      border: none;
+      transition: 0.3s;
+      color: #0a0f2c;
+    }
+
+    .export-btn:hover {
+      transform: scale(1.05);
+      background-color: #118ab2;
+      color: white;
+    }
   </style>
 </head>
 <body>
@@ -217,6 +241,12 @@
       </select>
 
       <button class="btn-agregar" id="btnAgregar">Agregar</button>
+    </div>
+
+    <!-- BOTONES DE EXPORTACIÓN -->
+    <div class="export-buttons">
+      <button class="export-btn" id="btnExcel">📗 Exportar a Excel</button>
+      <button class="export-btn" id="btnPDF">📕 Exportar a PDF</button>
     </div>
 
     <div class="tabla-wrapper">
@@ -317,7 +347,68 @@
         guardarEnLocalStorage();
       }
     });
+
+    /* -------------------------
+       EXPORTAR A EXCEL
+    -------------------------- */
+    document.getElementById("btnExcel").addEventListener("click", () => {
+      const wb = XLSX.utils.book_new();
+
+      const datos = [
+        ["Componente", "Categoría", "Cantidad", "Estado"]
+      ];
+
+      document.querySelectorAll("#tablaComponentes tbody tr").forEach(tr => {
+        const tds = tr.querySelectorAll("td");
+        datos.push([
+          tds[0].textContent,
+          tds[1].textContent,
+          tds[2].textContent,
+          tds[3].innerText
+        ]);
+      });
+
+      const ws = XLSX.utils.aoa_to_sheet(datos);
+      XLSX.utils.book_append_sheet(wb, ws, "Componentes");
+
+      XLSX.writeFile(wb, "componentes.xlsx");
+    });
+
+    /* -------------------------
+       EXPORTAR A PDF
+    -------------------------- */
+    document.getElementById("btnPDF").addEventListener("click", () => {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
+
+      doc.text("Listado de Componentes", 14, 15);
+
+      const rows = [];
+      document.querySelectorAll("#tablaComponentes tbody tr").forEach(tr => {
+        const tds = tr.querySelectorAll("td");
+        rows.push([
+          tds[0].textContent,
+          tds[1].textContent,
+          tds[2].textContent,
+          tds[3].innerText
+        ]);
+      });
+
+      doc.autoTable({
+        head: [["Componente", "Categoría", "Cantidad", "Estado"]],
+        body: rows,
+        startY: 20
+      });
+
+      doc.save("componentes.pdf");
+    });
+
   </script>
+
+  <!-- LIBRERÍAS PARA EXCEL Y PDF -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
 
 </body>
 </html>
